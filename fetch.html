@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Fetch NodeJS API</title>
+</head>
+
+<body>
+    <button onclick="listEmails()">List E-Mails</button>
+    <br>
+    <button onclick="addEmail()">Add E-Mail</button>
+    <br>
+    <p id="info"></p>
+
+    <script>
+        function listEmails() {
+            fetch('http://localhost:8080/list-emails', {
+                method: 'GET'
+            }).then(response => response.text()).then(result =>
+                document.getElementById('info').innerText = result
+            ).catch(error =>
+                document.getElementById('info').innerText = error
+            );
+        }
+
+        function addEmail() {
+            fetch('http://localhost:8080/add-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    "nome": "Leandro Loch",
+                    "telefone": "+5555996354577",
+                    "email": "leandroloch@gmail.com"
+                })
+            }).then(response => response.text()).then(result =>
+                document.getElementById('info').innerText = result
+            ).catch(error =>
+                document.getElementById('info').innerText = error
+            );
+        }
+    </script>
+</body>
+
+</html>
